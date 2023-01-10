@@ -1,0 +1,23 @@
+<rdf:RDF
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        xmlns:owl="http://www.w3.org/2002/07/owl#"
+        xmlns:skos-xl="http://www.w3.org/2008/05/skos-xl#"
+        xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+        xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+        xmlns:skos2="http://data.europa.eu/esco/skos2#" >
+  <rdf:Description rdf:about="http://data.europa.eu/esco/skos2">
+    <rdfs:comment xml:lang="en">This ontology expresses some constraints from the skos specification that are not in the W3C skos RDF
+      - disjointness of xl:labels.</rdfs:comment>
+    <owl:imports rdf:resource="http://www.w3.org/2004/02/skos/core"/>
+    <owl:imports rdf:resource="http://www.w3.org/2008/05/skos-xl"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2008/05/skos-xl#hiddenLabel">
+    <owl:propertyDisjointWith rdf:resource="http://www.w3.org/2008/05/skos-xl#prefLabel"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.w3.org/2008/05/skos-xl#altLabel">
+    <owl:propertyDisjointWith rdf:resource="http://www.w3.org/2008/05/skos-xl#hiddenLabel"/>
+    <owl:propertyDisjointWith rdf:resource="http://www.w3.org/2008/05/skos-xl#prefLabel"/>
+  </rdf:Description>
+</rdf:RDF>
