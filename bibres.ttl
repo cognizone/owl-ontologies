@@ -1,0 +1,351 @@
+@prefix : <https://data.europarl.europa.eu/def/bibres#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix epvoc: <https://data.europarl.europa.eu/def/epvoc#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@base <https://data.europarl.europa.eu/def/bibres#> .
+
+<https://data.europarl.europa.eu/def/bibres#> rdf:type owl:Ontology ;
+                                               owl:versionIRI <https://data.europarl.europa.eu/def/bibres#> ;
+                                               dcterms:description "This document describes the BIBRES ontology: a knowledge model made of classes and properties for describing, using the W3C's RDF(S)/OWL technology, bibliographic resources."@en ;
+                                               dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+                                               dcterms:title "TEST Bibliographic Resource Ontology"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/terms/description
+dcterms:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/license
+dcterms:license rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/title
+dcterms:title rdf:type owl:AnnotationProperty ;
+              rdfs:range rdfs:Literal ;
+              rdfs:domain :Expression .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://purl.org/dc/terms/MediaType
+dcterms:MediaType rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://data.europarl.europa.eu/def/bibres#embodies
+:embodies rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf owl:topObjectProperty ;
+          owl:inverseOf :isEmbodiedIn ;
+          rdfs:comment "This property associates a manifestation which embodies an expression. It is equivalent of the property frbroo:R4i_comprises_carriers_of"@en .
+
+
+###  https://data.europarl.europa.eu/def/bibres#exemplifies
+:exemplifies rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             owl:inverseOf :isExemplifiedBy ;
+             rdfs:comment "This property associates a publication with one of its exemplars. It is equivalent of the property frbroo:R7_is_example_of"@en .
+
+
+###  https://data.europarl.europa.eu/def/bibres#hasAspect
+:hasAspect rdf:type owl:ObjectProperty ;
+           owl:inverseOf :isReflectedIn ;
+           rdfs:comment "Relates a bibliographic resource to its FRBR aspects"@en .
+
+
+###  https://data.europarl.europa.eu/def/bibres#hasExpressionAspect
+:hasExpressionAspect rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf :hasAspect ;
+                     owl:inverseOf :isExpressionReflectedIn ;
+                     rdfs:domain :Document ;
+                     rdfs:range :Expression ;
+                     rdfs:comment "Relates a bibliographic resource to an expression reflected in it."@en .
+
+
+###  https://data.europarl.europa.eu/def/bibres#hasItemAspect
+:hasItemAspect rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf :hasAspect ;
+               owl:inverseOf :isItemReflectedIn ;
+               rdfs:domain :Document ;
+               rdfs:range :Item ;
+               rdfs:comment "Relates a bibliographic resource to an item reflected in it."@en .
+
+
+###  https://data.europarl.europa.eu/def/bibres#hasManifestationAspect
+:hasManifestationAspect rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf :hasAspect ;
+                        owl:inverseOf :isManifestationReflectedIn ;
+                        rdfs:domain :Document ;
+                        rdfs:range :Manifestation ;
+                        rdfs:comment "Relates a bibliographic resource to a manifestation reflected in it."@en .
+
+
+###  https://data.europarl.europa.eu/def/bibres#hasWorkAspect
+:hasWorkAspect rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf :hasAspect ;
+               owl:inverseOf :isWorkReflectedIn ;
+               rdfs:domain :Document ;
+               rdfs:range :Work ;
+               rdfs:comment "Relates a bibliographic resource to a work reflected in it."@en .
+
+
+###  https://data.europarl.europa.eu/def/bibres#isEmbodiedIn
+:isEmbodiedIn rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              rdfs:domain :Expression ;
+              rdfs:range :Manifestation ;
+              rdfs:comment "This relationship links an expression with a manifestation, indicating that an expression is included in a manifestation. It is equivalent of the property frbroo:R4_carriers_provided_by"@en .
+
+
+###  https://data.europarl.europa.eu/def/bibres#isExemplifiedBy
+:isExemplifiedBy rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf owl:topObjectProperty ;
+                 rdfs:domain :Manifestation ;
+                 rdfs:range :Item ;
+                 rdfs:comment "This relationship connects a manifestation with any item that reflects the characteristics of that manifestation. It is equivalent of frbroo:R7i_has_example"@en .
+
+
+###  https://data.europarl.europa.eu/def/bibres#isExpressionReflectedIn
+:isExpressionReflectedIn rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf :isReflectedIn ;
+                         rdfs:comment "Relates an expression to a bibliographic resource that reflects it."@en .
+
+
+###  https://data.europarl.europa.eu/def/bibres#isItemReflectedIn
+:isItemReflectedIn rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf :isReflectedIn ;
+                   rdfs:comment "Relates an item to a bibliographic resource that reflects it."@en .
+
+
+###  https://data.europarl.europa.eu/def/bibres#isManifestationReflectedIn
+:isManifestationReflectedIn rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf :isReflectedIn ;
+                            rdfs:comment "Relates a manifestation to a bibliographic resource that reflects it."@en .
+
+
+###  https://data.europarl.europa.eu/def/bibres#isRealizedThrough
+:isRealizedThrough rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf owl:topObjectProperty ;
+                   owl:inverseOf :realizes ;
+                   rdfs:domain :Work ;
+                   rdfs:range :Expression ;
+                   rdfs:comment "This relationship links a work with any of the expressions the signs of which convey the same intellectual or artistic content. It is equivalent of frbroo:R3_is_realised_in"@en .
+
+
+###  https://data.europarl.europa.eu/def/bibres#isReflectedIn
+:isReflectedIn rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf owl:topObjectProperty ;
+               rdfs:comment "Relates the FRBR aspect to the related bibliographic resource"@en .
+
+
+###  https://data.europarl.europa.eu/def/bibres#isWorkReflectedIn
+:isWorkReflectedIn rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf :isReflectedIn ;
+                   rdfs:comment "Relates a work to a bibliographic resource that reflects it."@en .
+
+
+###  https://data.europarl.europa.eu/def/bibres#language
+:language rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf owl:topObjectProperty ;
+          rdfs:comment "A language of the resource. It is equivalent of the property dcterms:language"@en .
+
+
+###  https://data.europarl.europa.eu/def/bibres#realizes
+:realizes rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf owl:topObjectProperty ;
+          rdfs:comment "This property associates an instance of Expression with an instance of Work. It is equivalent of the property frbroo:R3i_realises"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/identifier
+dc:identifier rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Work ;
+              rdfs:range rdfs:Literal ;
+              rdfs:comment "An unambiguous reference to the resource within a given context."@en .
+
+
+###  http://purl.org/dc/terms/created
+dcterms:created rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Work ;
+                rdfs:comment "Date of creation of the resource." .
+
+
+###  http://purl.org/dc/terms/creator
+dcterms:creator rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Work ;
+                rdfs:comment "An entity responsible for making the resource." .
+
+
+###  http://purl.org/dc/terms/format
+dcterms:format rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Manifestation ;
+               rdfs:range dcterms:MediaType .
+
+
+###  http://purl.org/dc/terms/issued
+dcterms:issued rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Manifestation ;
+               rdfs:range xsd:dateTime .
+
+
+###  http://purl.org/dc/terms/language
+dcterms:language rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Expression ;
+                 rdfs:range xsd:anyURI .
+
+
+###  http://purl.org/dc/terms/publisher
+dcterms:publisher rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Manifestation ;
+                  rdfs:comment "An entity responsible for making the resource available." .
+
+
+###  http://purl.org/dc/terms/title
+dcterms:title rdf:type owl:DatatypeProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#notation
+<http://www.w3.org/2004/02/skos/core#notation> rdf:type owl:DatatypeProperty ;
+                                               rdfs:domain :Work ;
+                                               rdfs:comment """A notation is a string of characters such as \"T58.5\" or \"303.4833\" used to uniquely identify a concept within the scope of a given concept scheme.
+
+A notation is different from a lexical label in that a notation is not normally recognizable as a word or sequence of words in any natural language.""" .
+
+
+###  https://data.europarl.europa.eu/def/epvoc#byteSize
+epvoc:byteSize rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Manifestation ;
+               rdfs:range xsd:long .
+
+
+###  https://data.europarl.europa.eu/def/epvoc#epNumber
+epvoc:epNumber rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Work .
+
+
+###  https://data.europarl.europa.eu/def/epvoc#epNumberVersion
+epvoc:epNumberVersion rdf:type owl:DatatypeProperty ;
+                      rdfs:domain :Work .
+
+
+###  https://data.europarl.europa.eu/def/epvoc#identifierYear
+epvoc:identifierYear rdf:type owl:DatatypeProperty ;
+                     rdfs:domain :Work .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  https://data.europarl.europa.eu/def/bibres#Briefing
+:Briefing rdf:type owl:Class ;
+          rdfs:subClassOf :Document ;
+          rdfs:label "Briefing" .
+
+
+###  https://data.europarl.europa.eu/def/bibres#CommitteeDraftReport
+:CommitteeDraftReport rdf:type owl:Class ;
+                      rdfs:subClassOf :Document ;
+                      rdfs:comment "The class of the draft reports of parliamentary committees" ;
+                      rdfs:label "Committee Draft Report" .
+
+
+###  https://data.europarl.europa.eu/def/bibres#CommitteeDraftReportExpression
+:CommitteeDraftReportExpression rdf:type owl:Class ;
+                                rdfs:subClassOf :Expression .
+
+
+###  https://data.europarl.europa.eu/def/bibres#CommitteeDraftReportItem
+:CommitteeDraftReportItem rdf:type owl:Class ;
+                          rdfs:subClassOf :Item .
+
+
+###  https://data.europarl.europa.eu/def/bibres#CommitteeDraftReportManifestation
+:CommitteeDraftReportManifestation rdf:type owl:Class ;
+                                   rdfs:subClassOf :Manifestation .
+
+
+###  https://data.europarl.europa.eu/def/bibres#CommitteeDraftReportWork
+:CommitteeDraftReportWork rdf:type owl:Class ;
+                          rdfs:subClassOf :Work .
+
+
+###  https://data.europarl.europa.eu/def/bibres#Document
+:Document rdf:type owl:Class ;
+          rdfs:comment "Basic class for describing bibliographic resources. It is equivalent to the class bibo:Document (Test documentation)" .
+
+
+###  https://data.europarl.europa.eu/def/bibres#Expression
+:Expression rdf:type owl:Class ;
+            rdfs:comment """Expression is the specific intellectual or artistic form that a work takes each time it is 'realized'. It describes any different version over the time or across languages of a Work.
+           \"This class comprises the intellectual or artistic realisations of works in the form of
+identifiable immaterial objects, such as texts, poems, jokes, musical or choreographic notations, movement pattern, sound pattern, images, multimedia objects, or any
+combination of such forms that have objectively recognisable structures. The
+substance of Expression is signs\" [2]. It is equivalent to the class frbroo:F2_Expression""" .
+
+
+###  https://data.europarl.europa.eu/def/bibres#Item
+:Item rdf:type owl:Class ;
+      rdfs:comment """Item is a single exemplar of a manifestation. The entity defined as item is a concrete entity.
+    \"This class comprises physical objects (files, printed books, scores, CDs, DVDs, CDROMS, etc.)\" [2]. It is equivalent to the class frbroo:F5_Item
+    """ .
+
+
+###  https://data.europarl.europa.eu/def/bibres#Manifestation
+:Manifestation rdf:type owl:Class ;
+               rdfs:comment """Manifestation is the physical embodiment of an expression of a work (ex: paper format, digital format, etc.). As an entity, manifestation represents all the physical objects that bear the same characteristics, in respect to both intellectual content and physical form. \"This class comprises the definitions of publication products.
+An instance of Manifestation is the 'species', and all copies of a
+given object are 'specimens' of it.\" [2]. It is equivalent to the class frbroo:F3_Manifestation_Product_Type
+    """ .
+
+
+###  https://data.europarl.europa.eu/def/bibres#PlenaryReport
+:PlenaryReport rdf:type owl:Class ;
+               rdfs:subClassOf :Document ;
+               rdfs:comment "Texts tabled for the Plenary of the European Parliament, containing reports, motions for resolutions, amendments, etc." ;
+               rdfs:label "Plenary Report" .
+
+
+###  https://data.europarl.europa.eu/def/bibres#PlenaryReportExpression
+:PlenaryReportExpression rdf:type owl:Class ;
+                         rdfs:subClassOf :Expression .
+
+
+###  https://data.europarl.europa.eu/def/bibres#PlenaryReportItem
+:PlenaryReportItem rdf:type owl:Class ;
+                   rdfs:subClassOf :Item .
+
+
+###  https://data.europarl.europa.eu/def/bibres#PlenaryReportManifestation
+:PlenaryReportManifestation rdf:type owl:Class ;
+                            rdfs:subClassOf :Manifestation .
+
+
+###  https://data.europarl.europa.eu/def/bibres#PlenaryReportWork
+:PlenaryReportWork rdf:type owl:Class ;
+                   rdfs:subClassOf :Work .
+
+
+###  https://data.europarl.europa.eu/def/bibres#Work
+:Work rdf:type owl:Class ;
+      rdfs:comment """Work is a distinct intellectual or artistic creation.
+     \"This class comprises distinct concepts or combinations of concepts identified in artistic and intellectual expressions, such as poems, stories or musical compositions.
+Such concepts may appear in the course of the coherent evolution of an original idea into one or more expressions that are dominated by the original idea. A Work may be elaborated by one or more Actors simultaneously or over time. The substance of Work is ideas. A Work may have members that are works in their own right\" [2]""" .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
