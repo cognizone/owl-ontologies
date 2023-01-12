@@ -1,0 +1,461 @@
+@base          <http://www.w3.org/ns/hydra/core#> .
+@prefix cc:    <http://creativecommons.org/ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix status: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+
+<#view>  a                  <#Link> ;
+        rdfs:comment        "A specific view of a resource." ;
+        rdfs:domain         <#Resource> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "view" ;
+        rdfs:range          <#Resource> ;
+        status:term_status  "testing" .
+
+<#returns>  a                 <#Link> ;
+        rdfs:comment          "The information returned by the Web API on success" ;
+        rdfs:domain           <#Operation> ;
+        rdfs:isDefinedBy      <> ;
+        rdfs:label            "returns" ;
+        rdfs:range            <#Resource> ;
+        schema:rangeIncludes  <#Class> , <#Resource> ;
+        status:term_status    "testing" .
+
+<#BasicRepresentation>
+        a                   <#VariableRepresentation> ;
+        rdfs:comment        "A representation that serializes just the lexical form of a variable value, but omits language and type information." ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "BasicRepresentation" ;
+        status:term_status  "testing" .
+
+<#Operation>  a             <#Class> ;
+        rdfs:comment        "An operation." ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "Operation" ;
+        rdfs:subClassOf     <#Resource> ;
+        status:term_status  "testing" .
+
+<#Class>  a                 rdfs:Class , <#Resource> ;
+        rdfs:comment        "The class of Hydra classes. Hydra classes and their instances are dereferenceable resources." ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "Hydra Class" ;
+        rdfs:subClassOf     rdfs:Class , <#Resource> ;
+        status:term_status  "testing" .
+
+<#totalItems>  a            rdf:Property ;
+        rdfs:comment        "The total number of items referenced by a collection." ;
+        rdfs:domain         <#Collection> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "total items" ;
+        rdfs:range          xsd:integer ;
+        status:term_status  "testing" .
+
+<#search>  a                <#TemplatedLink> ;
+        rdfs:comment        "A IRI template that can be used to query a collection." ;
+        rdfs:domain         <#Resource> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "search" ;
+        rdfs:range          <#IriTemplate> ;
+        status:term_status  "testing" .
+
+<#VariableRepresentation>
+        a                   <#Class> ;
+        rdfs:comment        "A representation specifies how to serialize variable values into strings." ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "VariableRepresentation" ;
+        rdfs:subClassOf     <#Resource> ;
+        status:term_status  "testing" .
+
+<#manages>  rdfs:comment    "Semantics of each member provided by the collection." ;
+        rdfs:domain         <#Collection> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "manages" ;
+        status:term_status  "testing" .
+
+<#expects>  a                 <#Link> ;
+        rdfs:comment          "The information expected by the Web API." ;
+        rdfs:domain           <#Operation> ;
+        rdfs:isDefinedBy      <> ;
+        rdfs:label            "expects" ;
+        rdfs:range            <#Resource> ;
+        schema:rangeIncludes  <#Class> , <#Resource> ;
+        status:term_status    "testing" .
+
+<#Collection>  a            <#Class> ;
+        rdfs:comment        "A collection holding references to a number of related resources." ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "Collection" ;
+        rdfs:subClassOf     <#Resource> ;
+        status:term_status  "testing" .
+
+<#entrypoint>  a            <#Link> ;
+        rdfs:comment        "A link to main entry point of the Web API" ;
+        rdfs:domain         <#ApiDocumentation> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "entrypoint" ;
+        rdfs:range          <#Resource> ;
+        status:term_status  "testing" .
+
+<#template>  a              rdf:Property ;
+        rdfs:comment        "A templated string with placeholders. The literal's datatype indicates the template syntax; if not specified, hydra:Rfc6570Template is assumed." ;
+        rdfs:domain         <#IriTemplate> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "template" ;
+        rdfs:range          <#Rfc6570Template> ;
+        rdfs:seeAlso        <#Rfc6570Template> ;
+        status:term_status  "testing" .
+
+<#PartialCollectionView>
+        a                   <#Class> ;
+        rdfs:comment        "A PartialCollectionView describes a partial view of a Collection. Multiple PartialCollectionViews can be connected with the the next/previous properties to allow a client to retrieve all members of the collection." ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "PartialCollectionView" ;
+        rdfs:subClassOf     <#Resource> ;
+        status:term_status  "testing" .
+
+<#offset>  a                rdf:Property ;
+        rdfs:comment        "Instructs to skip N elements of the set." ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "skip" ;
+        rdfs:range          xsd:nonNegativeInteger ;
+        status:term_status  "testing" .
+
+<#operation>  a             <#Link> ;
+        rdfs:comment        "An operation supported by the Hydra resource" ;
+        rdfs:domain         <#Resource> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "operation" ;
+        rdfs:range          <#Operation> ;
+        status:term_status  "testing" .
+
+<#last>  a                  <#Link> ;
+        rdfs:comment        "The last resource of an interlinked set of resources." ;
+        rdfs:domain         <#Resource> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "last" ;
+        rdfs:range          <#Resource> ;
+        status:term_status  "testing" .
+
+<#variable>  a              rdf:Property ;
+        rdfs:comment        "An IRI template variable" ;
+        rdfs:domain         <#IriTemplateMapping> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "variable" ;
+        rdfs:range          xsd:string ;
+        status:term_status  "testing" .
+
+<#previous>  a              <#Link> ;
+        rdfs:comment        "The resource preceding the current instance in an interlinked set of resources." ;
+        rdfs:domain         <#Resource> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "previous" ;
+        rdfs:range          <#Resource> ;
+        status:term_status  "testing" .
+
+<#method>  a                rdf:Property ;
+        rdfs:comment        "The HTTP method." ;
+        rdfs:domain         <#Operation> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "method" ;
+        rdfs:range          xsd:string ;
+        status:term_status  "testing" .
+
+<#object>  rdfs:comment     "The object." ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "object" ;
+        status:term_status  "testing" .
+
+<#member>  a                <#Link> ;
+        rdfs:comment        "A member of the collection" ;
+        rdfs:domain         <#Collection> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "member" ;
+        rdfs:range          <#Resource> ;
+        status:term_status  "testing" .
+
+<#title>  a                    rdf:Property ;
+        rdfs:comment           "A title, often used along with a description." ;
+        rdfs:isDefinedBy       <> ;
+        rdfs:label             "title" ;
+        rdfs:range             xsd:string ;
+        rdfs:subPropertyOf     rdfs:label ;
+        schema:domainIncludes  <#Link> , <#TemplatedLink> , <#ApiDocumentation> , <#Operation> , <#SupportedProperty> , <#Status> , <#Class> ;
+        status:term_status     "testing" .
+
+<#readable>  a              rdf:Property ;
+        rdfs:comment        "True if the client can retrieve the property's value, false otherwise." ;
+        rdfs:domain         <#SupportedProperty> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "readable" ;
+        rdfs:range          xsd:boolean ;
+        status:term_status  "testing" .
+
+<#pageReference>  a         rdf:Property ;
+        rdfs:comment        "Instructs to provide a specific page reference of the collection." ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "page reference" ;
+        status:term_status  "testing" .
+
+<#ApiDocumentation>  a      <#Class> ;
+        rdfs:comment        "The Hydra API documentation class" ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "ApiDocumentation" ;
+        rdfs:subClassOf     <#Resource> ;
+        status:term_status  "testing" .
+
+<#pageIndex>  a             rdf:Property ;
+        rdfs:comment        "Instructs to provide a specific page of the collection at a given index." ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "page index" ;
+        rdfs:range          xsd:nonNegativeInteger ;
+        rdfs:subPropertyOf  <#pageReference> ;
+        status:term_status  "testing" .
+
+<#IriTemplate>  a           <#Class> ;
+        rdfs:comment        "The class of IRI templates." ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "IRI Template" ;
+        rdfs:subClassOf     <#Resource> ;
+        status:term_status  "testing" .
+
+<#Rfc6570Template>  a       rdfs:Datatype ;
+        rdfs:comment        "An IRI template as defined by RFC6570." ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "RFC6570 IRI template" ;
+        rdfs:range          xsd:string ;
+        rdfs:seeAlso        <http://tools.ietf.org/html/rfc6570> ;
+        status:term_status  "testing" .
+
+<#limit>  a                 rdf:Property ;
+        rdfs:comment        "Instructs to limit set only to N elements." ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "take" ;
+        rdfs:range          xsd:nonNegativeInteger ;
+        status:term_status  "testing" .
+
+<#Resource>  a              <#Class> ;
+        rdfs:comment        "The class of dereferenceable resources." ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "Hydra Resource" ;
+        rdfs:subClassOf     rdfs:Resource ;
+        status:term_status  "testing" .
+
+<#Status>  a                <#Class> ;
+        rdfs:comment        "Additional information about a status code that might be returned." ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "Status code description" ;
+        rdfs:subClassOf     <#Resource> ;
+        status:term_status  "testing" .
+
+<#supportedOperation>
+        a                      <#Link> ;
+        rdfs:comment           "An operation supported by instances of the specific Hydra class or the target of the Hydra link" ;
+        rdfs:isDefinedBy       <> ;
+        rdfs:label             "supported operation" ;
+        rdfs:range             <#Operation> ;
+        schema:domainIncludes  <#TemplatedLink> , <#SupportedProperty> , <#Class> , <#Link> ;
+        status:term_status     "testing" .
+
+<#supportedProperty>  a     <#Link> ;
+        rdfs:comment        "The properties known to be supported by a Hydra class" ;
+        rdfs:domain         <#Class> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "supported properties" ;
+        rdfs:range          <#SupportedProperty> ;
+        status:term_status  "testing" .
+
+<#IriTemplateMapping>
+        a                   <#Class> ;
+        rdfs:comment        "A mapping from an IRI template variable to a property." ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "IriTemplateMapping" ;
+        rdfs:subClassOf     <#Resource> ;
+        status:term_status  "testing" .
+
+<#ExplicitRepresentation>
+        a                   <#VariableRepresentation> ;
+        rdfs:comment        "A representation that serializes a variable value including its language and type information and thus differentiating between IRIs and literals." ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "ExplicitRepresentation" ;
+        status:term_status  "testing" .
+
+<#next>  a                  <#Link> ;
+        rdfs:comment        "The resource following the current instance in an interlinked set of resources." ;
+        rdfs:domain         <#Resource> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "next" ;
+        rdfs:range          <#Resource> ;
+        status:term_status  "testing" .
+
+<#statusCode>  a            rdf:Property ;
+        rdfs:comment        "The HTTP status code" ;
+        rdfs:domain         <#Status> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "status code" ;
+        rdfs:range          xsd:integer ;
+        status:term_status  "testing" .
+
+<#supportedClass>  a        <#Link> ;
+        rdfs:comment        "A class known to be supported by the Web API" ;
+        rdfs:domain         <#ApiDocumentation> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "supported classes" ;
+        rdfs:range          <#Class> ;
+        status:term_status  "testing" .
+
+<#property>  a                 rdf:Property ;
+        rdfs:comment           "A property" ;
+        rdfs:isDefinedBy       <> ;
+        rdfs:label             "property" ;
+        rdfs:range             rdf:Property ;
+        schema:domainIncludes  <#IriTemplateMapping> , <#SupportedProperty> ;
+        status:term_status     "testing" .
+
+<#writeable>  a             rdf:Property ;
+        rdfs:comment        "True if the client can change the property's value, false otherwise." ;
+        rdfs:domain         <#SupportedProperty> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "writeable" ;
+        rdfs:range          xsd:boolean ;
+        status:term_status  "testing" .
+
+<#required>  a                 rdf:Property ;
+        rdfs:comment           "True if the property is required, false otherwise." ;
+        rdfs:isDefinedBy       <> ;
+        rdfs:label             "required" ;
+        rdfs:range             xsd:boolean ;
+        schema:domainIncludes  <#IriTemplateMapping> , <#SupportedProperty> ;
+        status:term_status     "testing" .
+
+<#possibleStatus>  a           <#Link> ;
+        rdfs:comment           "A status that might be returned by the Web API (other statuses should be expected and properly handled as well)" ;
+        rdfs:isDefinedBy       <> ;
+        rdfs:label             "possible status" ;
+        rdfs:range             <#Status> ;
+        schema:domainIncludes  <#Operation> , <#ApiDocumentation> ;
+        status:term_status     "testing" .
+
+<#variableRepresentation>
+        a                   rdf:Property ;
+        rdfs:comment        "The representation format to use when expanding the IRI template." ;
+        rdfs:domain         <#IriTemplateMapping> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "variable representation" ;
+        rdfs:range          <#VariableRepresentation> ;
+        status:term_status  "testing" .
+
+<#mapping>  a               rdf:Property ;
+        rdfs:comment        "A variable-to-property mapping of the IRI template." ;
+        rdfs:domain         <#IriTemplate> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "mapping" ;
+        rdfs:range          <#IriTemplateMapping> ;
+        status:term_status  "testing" .
+
+<#description>  a              rdf:Property ;
+        rdfs:comment           "A description." ;
+        rdfs:isDefinedBy       <> ;
+        rdfs:label             "description" ;
+        rdfs:range             xsd:string ;
+        rdfs:subPropertyOf     rdfs:comment ;
+        schema:domainIncludes  <#Link> , <#Operation> , <#SupportedProperty> , <#TemplatedLink> , <#ApiDocumentation> , <#Status> , <#Class> ;
+        status:term_status     "testing" .
+
+<#collection>  a            <#Link> ;
+        rdfs:comment        "Collections somehow related to this resource." ;
+        rdfs:domain         <#Resource> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "collection" ;
+        rdfs:range          <#Collection> ;
+        status:term_status  "testing" .
+
+<>      a                   owl:Ontology ;
+        rdfs:comment        "A lightweight vocabulary for hypermedia-driven Web APIs" ;
+        rdfs:label          "The Hydra Core Vocabulary" ;
+        cc:attributionName  "Hydra W3C Community Group" ;
+        cc:attributionURL   <http://www.hydra-cg.com/> ;
+        cc:license          <http://creativecommons.org/licenses/by/4.0/> ;
+        <http://purl.org/dc/terms/description>
+                "The Hydra Core Vocabulary is a lightweight vocabulary to create hypermedia-driven Web APIs. By specifying a number of concepts commonly used in Web APIs it enables the creation of generic API clients." ;
+        <http://purl.org/dc/terms/publisher>
+                "Hydra W3C Community Group" ;
+        <http://purl.org/dc/terms/rights>
+                "Copyright © 2012-2014 the Contributors to the Hydra Core Vocabulary Specification" ;
+        <http://purl.org/vocab/vann/preferredNamespacePrefix>
+                "hydra" .
+
+<#first>  a                 <#Link> ;
+        rdfs:comment        "The first resource of an interlinked set of resources." ;
+        rdfs:domain         <#Resource> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "first" ;
+        rdfs:range          <#Resource> ;
+        status:term_status  "testing" .
+
+<#returnsHeader>  a         rdf:Property ;
+        rdfs:comment        "Name of the header returned by the operation." ;
+        rdfs:domain         <#Operation> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "returns header" ;
+        rdfs:range          xsd:string ;
+        status:term_status  "testing" .
+
+<#apiDocumentation>  a      <#Link> ;
+        rdfs:comment        "A link to the API documentation" ;
+        rdfs:domain         <#Resource> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "apiDocumentation" ;
+        rdfs:range          <#ApiDocumentation> ;
+        status:term_status  "testing" .
+
+<#expectsHeader>  a         rdf:Property ;
+        rdfs:comment        "Specification of the header expected by the operation." ;
+        rdfs:domain         <#Operation> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "expects header" ;
+        rdfs:range          xsd:string ;
+        status:term_status  "testing" .
+
+<#Link>  a                  <#Class> ;
+        rdfs:comment        "The class of properties representing links." ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "Link" ;
+        rdfs:subClassOf     rdf:Property , <#Resource> ;
+        status:term_status  "testing" .
+
+<#SupportedProperty>  a     <#Class> ;
+        rdfs:comment        "A property known to be supported by a Hydra class." ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "Supported Property" ;
+        rdfs:subClassOf     <#Resource> ;
+        status:term_status  "testing" .
+
+<#subject>  rdfs:comment    "The subject." ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "subject" ;
+        status:term_status  "testing" .
+
+<#Error>  a                 <#Class> ;
+        rdfs:comment        "A runtime error, used to report information beyond the returned status code." ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "Error" ;
+        rdfs:subClassOf     <#Status> ;
+        status:term_status  "testing" .
+
+<#TemplatedLink>  a         <#Class> ;
+        rdfs:comment        "A templated link." ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "Templated Link" ;
+        rdfs:subClassOf     rdf:Property , <#Resource> ;
+        status:term_status  "testing" .
+
+<#freetextQuery>  a         rdf:Property ;
+        rdfs:comment        "A property representing a freetext query." ;
+        rdfs:domain         <#Resource> ;
+        rdfs:isDefinedBy    <> ;
+        rdfs:label          "freetext query" ;
+        rdfs:range          xsd:string ;
+        status:term_status  "testing" .
